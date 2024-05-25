@@ -128,7 +128,7 @@ async function getAllRunningMovies() {
   return await db.all(`
         select distinct movie.id as movie_id, name, description, duration, director, cover_image from movie
         inner join schedule on schedule.movie_id = movie.id 
-        where schedule.playing_from > datetime('now')
+        where schedule.playing_from > datetime('2022-02-15')
     `);
 }
 
@@ -144,14 +144,14 @@ async function getAllRunningMoviesWithOptions(limit, offset, sortBy, sortOrder) 
   }
 
   if (!validSortOrders.includes(sortOrder)) {
-    throw new Error(`Invalid sort order`);
+    throw new Error(`Invalid sort order`)
   }
 
   return await db.all(
     `
     select distinct movie.id as movie_id, name, description, duration, director, cover_image, datePublished from movie
     inner join schedule on schedule.movie_id = movie.id 
-    where schedule.playing_from > datetime('now')
+    where schedule.playing_from > datetime('2023-02-15')
     order by ${sortBy} ${sortOrder} limit ? offset ?;
     `,
     [limit, offset]
@@ -305,7 +305,7 @@ async function makeOrder(username, order) {
     await db.run("BEGIN TRANSACTION");
     try {
       const res = await db.get(
-        `insert into ticket_order (user, order_date) values (?, datetime('now')) returning id`,
+        `insert into ticket_order (user, order_date) values (?, datetime('2023-02-15')) returning id`,
         [username]
       );
       const orderID = res.id;
@@ -371,7 +371,7 @@ async function saveLog(log) {
         ip, 
         response_time, 
         error_msg, 
-        status_code) values (DATETIME('now'), ?, ?, ?, ?, ?, ?, ?, ?)`,
+        status_code) values (datetime('2023-02-15'), ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       log.method,
       log.url,
