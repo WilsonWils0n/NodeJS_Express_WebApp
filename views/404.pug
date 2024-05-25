@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+    include head.pug
+    title 404
+    body
+        include header.pug
+        main
+          section.section
+            h2.section__title.title--standard Oops...
+            p The resource #[strong(style='color: lightblue;') #{url}] unfortunately does not exist.
+        include footer.pug
+        include scripts.pug

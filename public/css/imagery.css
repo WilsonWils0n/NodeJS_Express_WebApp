@@ -1,0 +1,262 @@
+/* #---#---#---#---#---# */
+/*    Standard Images    */
+/* #---#---#---#---#---# */
+
+img {
+    cursor: pointer;
+}
+
+.figure-standard {
+    margin: 4vmin 0 8vmin 0;
+    display: flex;
+    justify-content: center;
+}
+
+.figure-standard > img {
+    width: 95%;
+    border-radius: 3vmin;
+}
+
+.figure-center {
+    margin: 2vmin 0;
+    display: flex;
+    justify-content: center;
+}
+
+.figure-center > img {
+    width: 25vmin;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 100%;
+    box-shadow: 0 0vmin 3vmin grey;
+}
+
+.figure-float-right {
+    display: inline;
+    float: right;
+    margin: 0 0 0 2.5vmin;
+}
+
+.figure-float-left {
+    display: inline;
+    float: left;
+    margin: 0 2.5vmin 0 0;
+}
+
+.figure-float-right>img,
+.figure-float-left>img {
+    border-radius: 2vmin;
+    width: 11.5em;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.clear-left {
+    clear: left;
+}
+
+.clear-right {
+    clear: right;
+}
+
+/* #---#---#---#---#---# */
+/*   Highlight Images    */
+/* #---#---#---#---#---# */
+
+.figure-sticky {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 4vmin;
+    margin: 4vmin 0;
+    max-width: 90%;
+}
+
+.figure-highlight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    z-index: 2;
+    user-select: none;
+
+    transform: scale(0.8);
+    transition: transform 0.4s ease;
+}
+
+.figure-highlight--active {
+    transform: scale(1);
+    cursor: zoom-out;
+}
+
+.figure-highlight > img {
+    border-radius: 1vmin;
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    box-shadow: 0 0 5vmin black;
+    cursor: zoom-out;
+}
+
+/* #---#---#---#---#---# */
+/*      Image Gallery    */
+/* #---#---#---#---#---# */
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 4vmin auto 0 auto;
+    flex-direction: column;
+}
+
+.gallery__column {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery__column>figure {
+    position: relative;
+    width: 20%;
+    margin: 1vmin;
+    align-self: stretch;
+}
+
+.gallery__column>figure>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1vmin;
+}
+
+.gallery__column>figure>figcaption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 1vmin;
+    box-sizing: border-box;
+
+    opacity: 0;
+    background: rgba(69, 69, 69, 0.25);
+    text-shadow: 0 0 1vmin black;
+    border-radius: 1vmin;
+    user-select: none;
+    font-size: 2vmin;
+    transform: scale(0);
+    pointer-events: none;
+
+    transition: opacity, transform 0.3s 0.1s ease-in-out;
+}
+
+.gallery__column>figure:hover>figcaption {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* #---#---#---#---#---#---#---# */
+/*        Embedded content       */
+/* #---#---#---#---#---#---#---# */
+
+.embedded-content {
+    border-radius: 3vmin;
+    overflow: hidden;
+    z-index: 1;
+    width: 32em;
+    aspect-ratio: 16 / 9;
+    height: max-content;
+    margin: 0 0 0 2.5vmin;
+    border: 0;
+}
+
+/* #---#---#---#---#---# */
+/*     Media Queries     */
+/* #---#---#---#---#---# */
+
+@media only screen and (max-width: 1200px) {
+    .embedded-content {
+        display: block;
+        border-radius: 3vmin;
+        width: 70%;
+        float: none;
+        margin: 0 auto 5vmin auto;
+    }
+}
+
+@media only screen and (max-width: 1025px) {
+    .gallery__column>figure {
+        width: 30%;
+    }
+
+    .embedded-content {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .figure-standard > img {
+        width: 90%;
+    }
+
+    .figure-sticky > img {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .embedded-content {
+        width: 90%;
+    }
+
+    .figure-float-right,
+    .figure-float-left {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin: 0 0 3vmin 0;
+    }
+
+    .figure--responsive-round>img {
+        border-radius: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .embedded-content {
+        width: 95%;
+    }
+
+    .gallery__column>figure {
+        width: 42.5%;
+    }
+
+    .gallery__column>figure>figcaption {
+        font-size: 2.5vmin;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .embedded-content {
+        width: 100%;
+    }
+}

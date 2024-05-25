@@ -1,0 +1,22 @@
+{
+  "name": "webtechnology-3",
+  "version": "1.0.0",
+  "description": "assignment 3",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node app.js",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pug": "^3.0.2",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.0",
+    "xss": "^1.0.14"
+  }
+}

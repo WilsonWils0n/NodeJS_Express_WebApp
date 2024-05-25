@@ -1,0 +1,98 @@
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+/*              Global CSS Rules             */
+
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap');
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* change, the color here, notice the effects everywhere :) */
+
+:root {
+    --_black: rgba(0,0,0,1);
+    --_opaque-black: rgba(0,0,0,0.5);
+
+    --_white: rgba(255,255,255,1);
+    --_dimmed-white: rgba(238,238,238,1);
+    --_opaque-white: rgba(255,255,255,0.5);
+
+    --_dark-blue: rgba(15,15,15,1);
+
+    --_light-gold: rgba(255,255,238);
+
+    --_light-blue: rgba(194, 230, 255, 1);
+
+    --_transparent-black: rgba(0,0,0,0);
+    --_transparent-white: rgba(255,255,255,0);
+}
+
+html,
+body {
+    margin: 0; /* In case the browsers adds funny margins to body, html */
+    padding: 0;
+    min-height: 100vh;
+
+    background: var(--_dark-blue);
+    
+    scroll-behavior: smooth;
+    /*overscroll-behavior-y: none;*/
+    overscroll-behavior-x: none;
+
+    color: #EEEEEE;
+    overflow-x: clip;
+}
+
+/* Scrollbar customization (doesn't apply to Firefox) */
+
+::-webkit-scrollbar {
+    width: 1.25vmin;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--_black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(320deg, var(--_light-gold) 0%, var(--_dimmed-white) 100%);
+    border-radius: 0.75vmin;
+    border: 0.33vmin var(--_black) solid;
+}
+
+/* styling selection colour of text */
+
+::-moz-selection {
+    color: var(--_black);
+    background: var(--_light-gold);
+}
+
+::selection {
+    color: var(--_black);
+    background: var(--_light-gold)
+}
+
+a {
+    text-decoration: none;
+    /* remove that annoying underline on every link */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* remove annoying overlay on apple touchscreen devices when clicking link */
+}
+
+button, input {
+    border: none;
+    outline: none;
+}
+
+/* text-gradients: */
+
+.heading-gradient {
+    background: linear-gradient(356deg, rgba(188, 215, 255, 1) 0%, rgba(218, 222, 230, 1) 65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}

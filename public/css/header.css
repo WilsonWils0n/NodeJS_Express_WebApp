@@ -1,0 +1,438 @@
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+/*              Global Variables             */
+
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+:root {
+    --hamburger-dimensions: 7vmin;
+    --hamburger-slice-height: 0.75vmin;
+    --hamburger-slice-offset: calc(0.5 * var(--hamburger-slice-height));
+    --hamburger-center-y: calc(0.5 * var(--hamburger-dimensions));
+
+    --navigation-height: 9vmin;
+
+    --header__title-font-size: 4vmin;
+    --header__title-letter-spacing: 2vmin;
+    --header__title-max-letter-spacing: 3.5vmin;
+}
+
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+/*              Navigation Header            */
+
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+.header {
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: var(--navigation-height);
+    z-index: 100;
+    color: var(--_light-gold);
+
+    text-transform: uppercase;
+
+    background: var(--_opaque-black);
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: -0.1vmin;
+    background-color: var(--_light-gold);
+    height: 0.2vmin;
+    width: 95%;
+    border-radius: 0.1vmin;
+}
+
+.header__title {
+    display: flex;
+    font-size: var(--header__title-font-size);
+    font-weight: 500;
+    letter-spacing: var(--header__title-letter-spacing);
+    text-shadow: 0 0 2vmin var(--_black);
+    user-select: none;
+    color: var(--_light-gold);
+
+    margin: 0;
+    /* letter spacing does not apply to first letter, making the text look off-centered, this is a fix */
+    text-indent: var(--header__title-letter-spacing);
+
+    transition: letter-spacing, text-indent, 0.5s ease;
+}
+
+.header__title > a:visited {
+    color: var(--_light-gold);
+}
+
+.header__title > a {
+    color: var(--_light-gold);
+}
+
+.header__title:hover {
+    text-shadow: 0vmin 0 1vmin var(--_white);
+}
+
+.header__link {
+    --header__link-upmotion-onhover: -0.5vmin;
+    position: relative;
+    display: flex;
+
+    font-size: 2vmin;
+    letter-spacing: 2px;
+    text-indent: 2px;
+    font-weight: 400;
+    user-select: none;
+    color: inherit;
+    padding: 0 0;
+
+    transition: padding, transform, text-shadow, 0.25s ease;
+}
+
+.header__link::after {
+    content: '';
+    position: absolute;
+    width: 75%;
+    right: 12.5%;
+    height: .5vmin;
+    background-color: var(--_light-gold);
+    bottom: -0.5vmin;
+    opacity: 0;
+    transform: translateY(1vmin) scale(0.8);
+    pointer-events: none;
+    border-radius: 0.25vmin ;
+
+    transition: transform, opacity, 0.25s ease;
+}
+
+.header__link:hover::after {
+    opacity: 1;
+    transform: translateY(0vmin) scale(1);
+}
+
+.header__link:hover {
+    padding: 0.5vmin 0;
+    color: var(--_white);
+    text-shadow: 0 0 0.5vmin var(--_white);
+    transform: translateY(var(--header__link-upmotion-onhover));
+}
+
+/* login button */
+
+.header__profile {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 1.5vmin;
+}
+
+.header__profile > .header__login {
+    display: block;
+    height: 75%;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    background-size: cover;
+    filter: invert(100%);
+    border: solid 0.5vmin rgba(16,16,32,1);
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    padding: calc(0.04 * var(--navigation-height));
+    cursor: pointer;
+    border-radius: 1vmin;
+
+    transition: background-color 0.25s ease;
+}
+
+.header__profile > .header__login:first-child {
+    background-image: url('../media/profile-icon.png');
+    border-radius: 100%;
+    order: 2;
+}
+
+.header__profile > .header__login:last-child {
+    background-image: url('../media/cart.png');
+    display: none;
+    order: 1;
+}
+
+.header__profile > .header__login:hover {
+    background-color: rgba(16,16,32,0.3);
+}
+
+/* header hover effect */
+
+#headerCanvas {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    z-index: 2;
+
+    pointer-events: none;
+    backface-visibility: hidden;
+}
+
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+/*              Mobile Navigation            */
+
+/* $---$---$---$---$---$---$---$---$---$---$ */
+
+.header__mobile-navigation {
+    display: none;
+    position: relative;
+    width: var(--hamburger-dimensions);
+    height: var(--hamburger-dimensions);
+    margin-left: var(--header__title-letter-spacing);
+
+    cursor: pointer;
+}
+
+.header__mobile-navigation+.header__link {
+    display: none;
+}
+
+/* general  of styling <div> children of .header__mobile-navigation */
+
+.header__mobile-navigation>div {
+    position: absolute;
+    height: var(--hamburger-slice-height);
+
+    background: linear-gradient(356deg, rgba(188, 215, 255, 1) 0%, rgba(218, 222, 230, 1) 65%);
+
+    transition: transform, border-radius, 0.2s;
+}
+
+/* create hollow circle style */
+
+.header__mobile-navigation>div:nth-child(1) {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background: transparent;
+    border-radius: 100%;
+
+    transition: box-shadow, border-radius, 0.2s;
+}
+
+.header__mobile-navigation--active>div:nth-child(1) {
+    box-shadow: 0vmin 0vmin 1vmin var(--_black);
+    border-radius: 0%;
+}
+
+.header__mobile-navigation>div:nth-child(1)::after {
+    content: "";
+    position: absolute;
+    width: calc(0.8 * var(--hamburger-dimensions));
+    height: calc(0.8 * var(--hamburger-dimensions));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0px 0.5vmin var(--_dimmed-white);
+
+    transition: border-radius 0.2s;
+}
+
+/* make circle a little less circle-like on hover */
+
+.header__mobile-navigation--active>div:nth-child(1)::after {
+    border-radius: 0%;
+}
+
+/* style specific hamburger-slices */
+
+.header__mobile-navigation>div:nth-child(2) {
+    width: 50%;
+    border-radius: var(--hamburger-slice-offset) var(--hamburger-slice-offset) 0vmin 0vmin;
+    transform: translate(calc(0.25 * var(--hamburger-dimensions)), calc(0.33 * var(--hamburger-dimensions) - var(--hamburger-slice-offset)));
+}
+
+.header__mobile-navigation>div:nth-child(3) {
+    width: 60%;
+    transform: translate(calc(0.2 * var(--hamburger-dimensions)), calc(var(--hamburger-center-y) - var(--hamburger-slice-offset)));
+}
+
+.header__mobile-navigation>div:nth-child(4) {
+    width: 50%;
+    border-radius: 0vmin 0vmin var(--hamburger-slice-offset) var(--hamburger-slice-offset);
+    transform: translate(calc(0.25 * var(--hamburger-dimensions)), calc(0.66 * var(--hamburger-dimensions) - var(--hamburger-slice-offset)));
+}
+
+/* move 'hamburger-slices' to center */
+
+.header__mobile-navigation--active>div:nth-child(2) {
+    transform: translate(calc(0.25 * var(--hamburger-dimensions)), calc(var(--hamburger-center-y) - var(--hamburger-slice-offset)));
+}
+
+.header__mobile-navigation--active>div:nth-child(3) {
+    border-radius: var(--hamburger-slice-offset);
+}
+
+.header__mobile-navigation--active>div:nth-child(4) {
+    transform: translate(calc(0.25 * var(--hamburger-dimensions)), calc(var(--hamburger-center-y) - var(--hamburger-slice-offset)));
+}
+
+.mobile-header {
+    display: none;
+    position: fixed;
+    top: var(--navigation-height);
+    left: 0;
+    height: calc(100% - var(--navigation-height));   
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    gap: 8%;
+
+    transition: opacity 0.3s ease;
+}
+
+.mobile-header--active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-header > a {
+    color: var(--_white);
+    transform: translateX(-5vmin);
+    opacity: 0;
+
+    transition: transform, opacity,  0.3s ease;
+}
+
+.mobile-header > a:nth-child(1) { transition-delay: 0s; }
+.mobile-header > a:nth-child(2) { transition-delay: 0.1s; }
+.mobile-header > a:nth-child(3) { transition-delay: 0.2s; }
+.mobile-header > a:nth-child(4) { transition-delay: 0.3s; }
+.mobile-header > a:nth-child(5) { transition-delay: 0.4s; }
+
+.mobile-header--active > a {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.mobile-header--active + .header {
+    position: fixed;
+}
+
+.mobile-header--active + .header > .header__link {
+    display: none;
+}
+
+.mobile-header--active + .header > .header__title {
+    display: initial;
+}
+
+.mobile-header--active ~ main {
+    margin-top: var(--navigation-height);
+} 
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 1400px) {
+    .header__title {
+        --header__title-font-size: 4vmin;
+        --header__title-letter-spacing: 2vmin;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 3/2) {
+    .header__title, .header__title > a {
+        width: var(--navigation-height);
+        height: var(--navigation-height);
+    }
+
+    .header__title {
+        background-image: url('../media/favicon.png');
+        background-size: cover;
+        filter: invert(100%);
+    }
+
+    .header__title > a {
+        color: rgba(0,0,0,0);
+        text-shadow: none;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 5/4) {
+    :root {
+        --navigation-height: 10vmin;
+        --hamburger-dimensions: 7vmin;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 1 / 1) {
+    .header__title > a {
+        width: initial;
+        height: initial;
+        color: initial;
+    }
+
+    .header {
+        justify-content: space-around;
+    }
+
+    .header__login {
+        margin-right: var(--header__title-letter-spacing);
+    }
+
+    .mobile-header {
+        display: flex;
+    }
+
+    .header::after {
+        left: 2.5%;
+    }
+
+    .header__title {
+        --header__title-letter-spacing: 2vmin;
+        --header__title-font-size: 4vmin;
+        text-align: center;
+        display: flex;
+        flex-grow: 2;
+        justify-content: center;
+        width: initial;
+        height: initial;
+        background-image: none;
+        filter: none;
+    }
+
+    .header__link {
+        opacity: 0;
+        flex-grow: 2;
+        display: none;
+        text-align: center;
+    }
+
+    .header__link::after,
+    .header__link::before {
+        display: none;
+    }
+
+    .header__mobile-navigation {
+        display: block;
+    }
+}
