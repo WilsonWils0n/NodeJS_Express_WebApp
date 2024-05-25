@@ -372,7 +372,7 @@
     }
 
     .header__title > a {
-        color: rgba(0,0,0,0);
+        color: transparent;
         text-shadow: none;
     }
 }
@@ -388,7 +388,7 @@
     .header__title > a {
         width: initial;
         height: initial;
-        color: initial;
+        color: var(--_light-gold);
     }
 
     .header {
